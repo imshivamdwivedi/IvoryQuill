@@ -1,0 +1,26 @@
+{
+  "name": "ivoryquill",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon server/server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "ejs": "^2.6.2",
+    "express": "~4.16.1",
+    "express-jwt": "^5.3.3",
+    "express-validator": "^6.6.0",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.20",
+    "morgan": "~1.9.1",
+    "nodemailer": "^6.4.10",
+    "nodemon": "^2.0.4",
+    "uuid": "^8.2.0",
+    "uuidv4": "^6.1.1"
+  }
+}
