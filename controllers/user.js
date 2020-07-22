@@ -35,13 +35,14 @@ exports.updateUser =(req,res)=>{
 };
 
 exports.getMyArticles= (req,res) =>{
-    Article.findById({auther_id:req.profile._id}).exec((err,articles)=>{
+     console.log(req.profile._id);
+    Article.findOne({auther_id:req.profile._id}).exec((err,articles)=>{
           if(err){
               return res.status(404).json({
                   err:"No Articles Found "
               });
           }
 
-          return res.sjon(articles);
+          return res.json(articles);
     });
 };

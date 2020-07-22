@@ -44,5 +44,18 @@ exports.deleteBlog =(req,res) =>{
 };
 
 exports.postBlog = (req,res) =>{
-//
+  const article = new Article(req.body);
+  console.log(req.body);
+  article.save((err, article) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({
+        err: "Not able to save your Blog in DB"
+      });
+    }
+    res.json({
+      title: article.title,
+      body: article.body,
+    });
+  });
 };

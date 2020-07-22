@@ -1,4 +1,4 @@
-const {body,validationResult} = require("express-validator")
+const {validationResult} = require("express-validator")
 var expressJwt = require("express-jwt");
 var jwt = require("jsonwebtoken");
 const User = require("../server/modals/user");
@@ -6,41 +6,32 @@ var config = require("../server/config");
 var nodemailer = require("nodemailer");
 
 
-exports.signup = (req,res) =>{
-    const{email}= req.body;
-
+exports.signup = async(req, res) => {
     const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.status(422).json({
-            error:errors.array()[0].msg
-        });
+    const{email,phone} = req.body;
+    if (!errors.isEmpty()) {
+      return res.status(422).json({
+        error: errors.array()[0].msg
+      });
     }
 
-    User.findOne({email}).exec((err,user)=>{
-        if(user){
-            return res.status(400).json({
-            err:"Email is Already Exists !"
-            });
-        }else{
-            const user = new User(req.body);
-            user.save((err,user)=>{
-                if(err){
-                    return res.status(400).json({
-                        err:"Something is wrong can not save USer in DB"
-                    });
-                }
-                res.json({
-                    name:user.name,
-                    email:user.email,
-                    id:user._id
-                });
-            });
-
-            
-        }
-    })
-
     
+  
+    const user = new User(req.body);
+    console.log(user);
+    user.save((err, user) => {
+      if (err) {
+        console.log(err);
+        return res.status(400).json({
+          err: "Not able to save user in DB"
+        });
+      }
+      res.json({
+        name: user.name,
+        email: user.email,
+        id: user._id
+      });
+    });
 };
 
 exports.signin =(req,res) =>{
@@ -90,6 +81,10 @@ exports.isSignedIn = expressJwt({
 
 exports.isAuthenticated = (req,res,next) =>{
     let checker = req.profile && req.auth && req.profile._id==req.auth._id;
+    // console.log(req.profile);
+    // console.log(req.auth);
+    // console.log(req.profile._id);
+    // console.log(req.auth._id);
     if(!checker){
         return res.status(403).json({
             err:"Access Denied"
@@ -99,7 +94,7 @@ exports.isAuthenticated = (req,res,next) =>{
 };
 
 exports.isAdmin = (req,res,next)=>{
-    if(req.profile.role===1){
+    if(req.profile.role===0){
         return res.staus(403).json({
             error:"Access Denied ! your are not Admin"
         });

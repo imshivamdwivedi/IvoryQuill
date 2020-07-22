@@ -5,11 +5,10 @@ var articleSchema = mongoose.Schema({
     auther_id:{
      type:mongoose.Schema.Types.ObjectId,
      ref:'User',
-     required:true
     },
-    tag:{
-        type:String,
-        required:true
+    flag:{
+        type:Number,
+        default:2,
     },
     body:{
         type: String,
@@ -30,4 +29,12 @@ var articleSchema = mongoose.Schema({
 
 },{ timestamps: true });
 
-module.exports = mongoose.model("Article", articleSchema);
+var Article = mongoose.model("Article", articleSchema);
+
+// Article.create({
+//     auther_id:'5eff5152cfa0a50b58e246a4',
+//     title:'Love',
+//     body:"This is my Love",
+// });
+
+module.exports = Article;

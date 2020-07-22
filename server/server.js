@@ -8,6 +8,7 @@ var mongoose = require('mongoose')
 //route in use
 const mainRoute = require('../routes/default');
 const authRoute = require('../routes/auth.js');
+const blogRoute = require('../routes/blog.js');
 
 
 
@@ -36,6 +37,7 @@ app.use(cookieParser());
 
 app.use('/', mainRoute);
 app.use('/api',authRoute);
+app.use('/api/blog',blogRoute);
 
 
 const port = process.env.PORT ||3000;

@@ -6,14 +6,14 @@ const{getUserById} = require('../controllers/user');
 const{getBlogById,getAllBlogs,getBlog,deleteBlog,postBlog} = require('../controllers/blog');
 
 router.param("blogId",getBlogById);
-
+router.param("userId",getUserById);
 //read routes
-router.get('/api/allBlogs',getAllBlogs);
-router.get('/api/blog/:blogId/:userId',isSignedIn,isAuthenticated,getBlog,getUserById,getBlogById);
+router.get('/allBlogs',isAdmin,getAllBlogs);
+router.get('/:blogId/:userId',isSignedIn,isAuthenticated,getBlog);
 //Write artcle
-router.post('/api/write/blog/:userId',isSignedIn,isAuthenticated,postBlog,getBlogById);
+router.post('/write/:userId',isSignedIn,isAuthenticated,postBlog);
 
-router.delete('/api/delete/blog/:blogId/:userId', isSignedIn,isAuthenticated,isAdmin,deleteBlog,getBlogById,getUserById);
+router.delete('/delete/:blogId/:userId', isSignedIn,isAuthenticated,isAdmin,deleteBlog);
 
 
 module.exports =router;
