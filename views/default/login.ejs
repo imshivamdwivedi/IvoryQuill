@@ -33,15 +33,15 @@
 
             <!-- Login Form -->
             <div class="login form-peice switched">
-               <form class="login-form" action="#" method="post">
+               <form action="/api/signin" method="POST" class="login-form">
                   <div class="form-group">
                      <label for="email">Email Adderss</label>
-                     <input type="email" name="email" id="loginemail" required>
+                     <input type="email" name="email" required>
                   </div>
 
                   <div class="form-group">
-                     <label for="loginPassword">Password</label>
-                     <input type="password" name="password" id="loginPassword" required>
+                     <label for="password">Password</label>
+                     <input type="password" name="password"  required>
                   </div>
 
                   <div class="CTA">
@@ -54,35 +54,35 @@
 
             <!-- Signup Form -->
             <div class="signup form-peice">
-               <form class="signup-form" action="#" method="post">
+               <form  action="/api/signup" method="POST">
 
                   <div class="form-group">
                      <label for="name">Full Name</label>
-                     <input type="text" name="username" id="name" class="name">
-                     <span class="error"></span>
+                     <input type="text" name="name" >
+                     
                   </div>
 
                   <div class="form-group">
                      <label for="email">Email Adderss</label>
-                     <input type="email" name="email" id="email" class="email">
-                     <span class="error"></span>
+                     <input type="email" name="email" >
+                
                   </div>
 
                   <div class="form-group">
                      <label for="phone">Phone Number </label>
-                     <input type="text" name="phone" id="phone">
+                     <input type="number" name="phone" >
                   </div>
 
                   <div class="form-group">
                      <label for="password">Password</label>
-                     <input type="password" name="password" id="password" class="pass">
-                     <span class="error"></span>
+                     <input type="password" name="password" >
+                  
                   </div>
 
 
                   <div class="CTA">
-                     <input type="submit" href="/signup" id="submit">
-                     <a href="#" class="switch">I have an account</a>
+                     <input type="submit" value="Register">
+                     <a href="#" class="switch">I have an account</a><br/>
                   </div>
                </form>
             </div><!-- End Signup Form -->
@@ -90,7 +90,9 @@
       </div>
 
    </section>
-   
+   <div class="text-center">
+      <a href="/"  class="btn btn-danger btn-lg">Home</a>
+    </div>
 
 </div>
 <div class="icon-bar">

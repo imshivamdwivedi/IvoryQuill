@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo&display=swap');
+body{
+    font-family: "Heebo", sans-serif;
+    font-size: 1rem;
+}
+.page-nav li a{
+    color: #000000;
+    font-weight: 600;
+}
+span.navbar-toggler-icon{
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+.page-nav li a:hover{
+    text-decoration: line-through;
+    color: #000000;
+}
+header.post-Header{
+    margin-top: 30px;
+    position: relative;
+    margin-bottom: 20px;
+}
+ul.page-nav{
+    position: absolute;
+    right: 40px;
+    top: 20px;
+}
+ul.page-nav li{
+    list-style-type: none;
+    margin-right: 30px;
+    float: left;
+}
+.submit-button{
+    background-color: #f2d300;
+}
+.submit-button:hover{
+    background-color: #f7b500;
+}
+button.navbar-toggler{
+    position: absolute;
+    margin-left: 10px;
+    right: 10px;
+    top: 0px;
+}
+.profile{
+    text-align: center;
+    margin-top: 180px;
+}
+.profile .profile-pic{
+    width: 250px;
+    height: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    border: 2px solid #f7b500;
+
+}
+.profile-options ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    padding-left: 0;
+}
+.profile .profile-options li.options{
+    list-style-type: none;
+    float: left;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-bottom: 2px solid #f7b500;
+}
+.profile-options li a{
+    color: #000000;
+    font-weight: 600;
+}
+.profile-options li a:hover{
+    text-decoration: line-through;
+    color: #000000;
+}
+@media screen and (max-width: 767px){
+    .logo{
+        left: 10px;
+    }
+    ul.page-nav{
+        top: auto;
+    }
+    ul.page-nav li{
+        margin-top: 10px;
+        margin-right: -20px;
+    }
+    .profile{
+        margin-top: auto;
+    }
+    .profile .profile-pic{
+        width: 200px;
+        height: 200px;
+        margin-top: 30px;
+    }
+    .profile-options ul{
+        display: block;
+    }
+    .profile .profile-options li.options{
+        float: none;
+        width: 30%;
+        margin: 15px auto auto auto;
+    }
+}
+
+
+
+
+/*-----------------edit-page styles---------------------*/
+
+.edit-profile-container{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.edit-profile{
+    margin-top: 70px;
+}
+.edit-profile .profile-pic{
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+.page-head{
+    font-weight: 700;
+    margin-left: 15px;
+}
+.edit-img{
+    text-align: center;
+    width: 100%;
+}
+.img-buttons{
+    margin-top: 20px;
+}
+.img-buttons .btn{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.img-buttons .btn-primary{
+    background: #f7b500;
+}
+
+.page-subhead{
+    font-weight: 600;
+    margin-top: 20px;
+}
+.edit-details{
+   margin-top: 40px;
+}
+.edit-details .row{
+    margin-top: 10px;
+}
+.edit-details .row div{
+    text-align: left;
+}
+.edit-details label{
+    font-size: 1em;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 767px){
+    .page-head{
+        font-size: 1.6rem;
+        margin-left: 0px;
+    }
+    .edit-profile{
+        margin-top: 20px;
+    }
+    .edit-profile .profile-pic{
+        height: 150px;
+        width: 150px;
+    }
+    .page-subhead{
+        font-size: 1.3rem;
+    }
+}
+
+
+
+
+.testing{
+    position: absolute;
+    background: #f2d300;
+    width: 15%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+@media screen and (max-width: 767px)
+{
+    .testing{
+        display: none;
+    }
+}
+.postEntry{
+    margin-top: 150px;
+}
+.post-title-box{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;    
+    margin-bottom: -1px;
+}
+.post-body-box{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;    
+}
+label.terms-checkbox{
+    float: right;
+    margin-top: 10px;
+}
+
+button.navbar-toggler{
+    margin-left: 10px;
+    right: 10px;
+    top: 0px;
+}
+@media screen and (max-width: 768px){
+    .logo{
+        left: 10px;
+    }
+    ul.page-nav{
+        left: 10px;
+        top: auto;
+    }
+    ul.page-nav li{
+        margin-top: 10px;
+        margin-right: -20px;
+    }
+}

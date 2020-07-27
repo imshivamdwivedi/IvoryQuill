@@ -7,8 +7,6 @@ var userSchema = mongoose.Schema({
     name:{
         type:String,
         required:true,
-        maxlength:32,
-        trim:true
     },
     email:{
        type:String,

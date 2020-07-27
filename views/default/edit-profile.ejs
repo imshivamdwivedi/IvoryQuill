@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/profile.css">
+</head>
+<body>
+    <div class="testing"></div>
+    <header class="post-header">
+        <a href="#">
+            <img class="logo" src="img/logo/IvoryQuill.png" alt="logo">
+        </a>
+        <nav class="navbar-expand-md">
+            <button class="navbar-toggler collapsed" onclick="showHideNav()" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              <div></div>
+            </button>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav page-nav">
+                    <li class="nav-item"> <a href="#">Home</a> </li>
+                    <li class="nav-item"> <a href="#">Logout</a> </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="container edit-profile-container">
+        <h2 class="page-head hidden-md">Edit Profile</h2>
+        <div class="row edit-profile">
+            <div class="col-lg-5 col-md-10">
+                <div class="edit-img">
+                    <img class="profile-pic" src="img/profilepic.jpg" alt="profil_pic"><br>
+                    <div class="img-buttons">
+                        <button class="btn btn-primary">Change</button>
+                        <button class="btn btn-danger">Remove</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-10">
+                <h3 class="page-subhead">Personal Info</h3>
+                <form class="edit-details" action="" method="">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="firstname">First name: </label>
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" name="firstName">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="lastname">Last name: </label>
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" name="lastName">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="email">E-mail ID: </label>
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="email" name="email">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="mobileNo">Contact No.: </label>
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="number" name="mobileNo">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="Username">Username: </label>
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" name="username">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="password">Password: </label>
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" name="password">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="password-confirmation">Confirm password:</label>
+                        </div>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text" name="confPassword">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="img-buttons">
+                            <button class="btn btn-primary">Save Changes</button>
+                            <button class="btn btn-danger">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="javascripts/profile.js"></script>
+</body>
+</html>

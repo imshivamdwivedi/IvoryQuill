@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -12,10 +13,15 @@
     <link rel="stylesheet" href="./stylesheets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="./vendors/jquery/jquery.min.js"></script>
+    <script src="ejs.js"></script>
    
 </head>
 
 <body>
+    
+    <% if (!userProfile==undefined){ %>
+        <h2><%= userProfile.name %></h2>
+      <% } %>
     <header class="oleez-header">
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-logo" href="/"><img src="./images/IvoryQuill.png"/> </a>
@@ -30,10 +36,6 @@
                         <span class="cart-item-count">0</span>
                         <img src="./images/shopping-cart.svg" alt="cart">
                     </a>
-                </li>
-                <li class="nav-item dropdown d-none d-sm-block">
-                    <a class="nav-link dropdown-toggle" href="/login" 
-                        aria-haspopup="true" aria-expanded="false">LOGIN</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#!" data-toggle="offCanvasMenu">
@@ -53,6 +55,19 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/about">About</a>
                     </li>
+                      <% if(userProfile === undefined){ %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                      <% } else{ %>      
+                        <li class="nav-item">
+                            <a class="nav-link" href="/profile">Profile</a>
+                        </li>  
+                        <li class="nav-item">
+                            <a class="nav-link" href="/api/signout">Logout</a>
+                        </li>
+                     <% } %> 
+                  
                    <!-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#!" id="pagesDropdown" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">Pages</a>
@@ -91,7 +106,7 @@
                             <img src="./images/search.svg" alt="search">
                         </a>
                     </li>
-                    <li class="nav-item nav-item-cart">
+                    <!-- <li class="nav-item nav-item-cart">
                         <a class="nav-link nav-link-btn" href="#!">
                             <span class="cart-item-count">0</span>
                             <img src="./images/shopping-cart.svg" alt="cart">
@@ -99,8 +114,8 @@
                     </li>
                     <li class="nav-item dropdown d-none d-sm-block">
                         <a class="nav-link dropdown-toggle" href="/login" 
-                            aria-haspopup="true" aria-expanded="false">LOGIN</a>
-                    </li>
+                            aria-haspopup="true" aria-expanded="false">LOGIN</h1></a>
+                    </li> -->
                 </ul>
             </div>
         </nav>
@@ -500,63 +515,7 @@
 
     <!-- Modals -->
     <!-- Off canvas social menu -->
-    <div class="icon-bar">
-        <a href="https://www.facebook.com/Ivoryquillpublications" class="facebook"><i class="fa fa-facebook"></i></a>
-        <a href="#" class="google"><i class="fa fa-google"></i></a>
-        <a href="https://www.linkedin.com/in/ivoryquill-publications-33b9061ab/" class="linkedin"><i class="fa fa-linkedin"></i></a>
-        <a href="https://www.instagram.com/_ivoryquill_/" class="youtube"><i class="fa fa-instagram"></i></a>
-      </div>
-      
-      <style>
-
-          .icon-bar {
-  position: fixed;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-/* Style the icon bar links */
-.icon-bar a {
-  display: block;
-  text-align: center;
-  padding: 16px;
-  transition: all 0.3s ease;
-  color: white;
-  font-size: 20px;
-}
-
-/* Style the social media icons with color, if you want */
-.icon-bar a:hover {
-  background-color: #000;
-}
-
-.facebook {
-  background: #3B5998;
-  color: white;
-}
-
-.twitter {
-  background: #55ACEE;
-  color: white;
-}
-
-.google {
-  background: #dd4b39;
-  color: white;
-}
-
-.linkedin {
-  background: #007bb5;
-  color: white;
-}
-
-.youtube {
-  background: #bb0000;
-  color: white;
-}
-          </style>
+    
     <!-- Full screen search box -->
     <div id="searchModal" class="search-modal">
         <button type="button" class="close" aria-label="Close" data-dismiss="searchModal">

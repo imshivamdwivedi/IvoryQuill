@@ -9,11 +9,12 @@ var nodemailer = require("nodemailer");
 exports.signup = async(req, res) => {
     const errors = validationResult(req);
     const{email,phone} = req.body;
-    if (!errors.isEmpty()) {
-      return res.status(422).json({
-        error: errors.array()[0].msg
-      });
-    }
+    
+    // if (!errors.isEmpty()) {
+    //   return res.status(422).json({
+    //     error: errors.array()[0].msg
+    //   });
+    // }
 
     
   
@@ -34,9 +35,11 @@ exports.signup = async(req, res) => {
     });
 };
 
-exports.signin =(req,res) =>{
+exports.signin = (req,res) =>{
+  // console.log(req.body);
    const errors = validationResult(req);
    const {email,password} = req.body;
+  //  console.log(email);
    if(!errors.isEmpty()){
        return res.status(422).json({
            errors:errors.array()[0].msg
@@ -63,15 +66,22 @@ exports.signin =(req,res) =>{
 
        //sending response to front end
        const{_id,name,email,role} =user;
-       return res.status(200).json({token,user:{_id,name,email,role}});
-    });
+      //  res.status(200).json({token,user:{_id,name,email,role}});
+      userProfile = {
+        _id,
+        name,
+        email,
+        role
+      };
+      // console.log(userProfile._id +" " +userProfile.name+" "+userProfile.email+" "+userProfile._id);
+       res.redirect('/');
+      });
 };
 
 exports.signout = (req, res) => {
     res.clearCookie("token");
-    res.json({
-      message: "User signout successfully"
-    });
+    let userProfile;
+    res.redirect('/login');
   };
 
 exports.isSignedIn = expressJwt({

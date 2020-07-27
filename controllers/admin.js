@@ -23,6 +23,17 @@ exports.getAllUsers =(req,res) =>{
    });
 };
 
+exports.getUserInfo = (req,res)=>{
+  User.findById({_id:req.profile._id},(err,user)=>{
+      if(err){
+        return res.status(404).json({
+          err:"User Not Found"
+        });
+      }
+      return res.json(user);
+  });
+};
+
 exports.deleteArticle = (req,res)=>{
   let blog=req.blog;
   blog.remove((err,deletedBlog)=>{

@@ -12,17 +12,17 @@ exports.getBlogById = (req,res,next,id)=>{
   });
 };
 
-exports.getAllBlogs = (req,res) =>{
-     let limit = 10;
-     Article.find().limit(limit).exec((err,articles)=>{
-       if(err){
-           return res.status(400).json({
-             err:"Bad Request can Get you all articles"
-           });
-       }
-       return res.json(articles);
-     });
-};
+// exports.publishedBlog = async(req,res) =>{
+//     var data = await Article.find({'auther_id':req.profile._id});
+//     var array[];
+//      for(int i=0;i<data.length;i++){
+           
+//      }
+// };
+
+// exports.getStatus=(req,res)=>{
+//    Article.fin
+// };
 
 exports.getBlog=(req,res)=>{
   return res.json(req.blog);
