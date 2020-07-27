@@ -27,11 +27,7 @@ exports.signup = async(req, res) => {
           err: "Not able to save user in DB"
         });
       }
-      res.json({
-        name: user.name,
-        email: user.email,
-        id: user._id
-      });
+      res.redirect('/login');
     });
 };
 
