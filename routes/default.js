@@ -43,8 +43,16 @@ router.get('/profile',async(req,res)=>{
 },isAuthenticated,isSignedIn);
 
 
-router.get('/write',(req,res)=>{
-  res.render('default/write');
+router.get('/write',async(req,res)=>{
+  let  userProfile;
+  if(req.cookies.token){
+  var id =jwt_decode(req.cookies.token);
+  var data= await User.findById(id._id);
+  userProfile=data;
+  }
+  res.render('default/write',{
+    userProfile:userProfile
+  });
 },isAuthenticated,isSignedIn);
 
  router.get('/msg', (req, res) => {

@@ -32,7 +32,7 @@
                 <li>Your can also track the status of your submission. Once you see Approved in the status,it will go live within a week. If it deosen't, please write to us at contact@thescribbedstroies.in</li>
             </ol>
         </div> -->
-        <form action="" method="POST">
+        <form action="/api/blog/write/<%=userProfile._id%>" method="POST">
             <input class="form-control post-title-box" type="text" name="postTitle" placeholder="Title" autofocus required>
             <textarea class="form-control post-body-box" name="postBody" col="30" rows="10" required></textarea>
             <label class="terms-checkbox" for="">
