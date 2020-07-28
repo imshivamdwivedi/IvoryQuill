@@ -15,7 +15,11 @@ exports.signup = async(req, res) => {
     //     error: errors.array()[0].msg
     //   });
     // }
-
+    if(await User.findOne({email})){
+        res.render('default/msg',{
+            message:"User Already Exit , Try Another Mail to Sign Up !"
+        });
+    }else{
     
   
     const user = new User(req.body);
@@ -27,8 +31,11 @@ exports.signup = async(req, res) => {
           err: "Not able to save user in DB"
         });
       }
-      res.redirect('/login');
+      res.render('default/msg',{
+          message:"Account Created Successfully, Now Login !"
+        });
     });
+    } 
 };
 
 exports.signin = (req,res) =>{

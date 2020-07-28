@@ -5,55 +5,53 @@ const User = require('../server/modals/user');
 const {isSignedIn,isAuthenticated} = require("../controllers/auth");
 const {getUser,getUserById,getMyArticles,updateUser} = require("../controllers/user");
 const config = require('../server/config');
-const user = require('../server/modals/user');
+
 /* GET home page. */
 router.get('/',async(req, res) => {
  let  userProfile;
-  if(req.cookies.token){
+   if(req.cookies.token){
    var id =(jwt_decode(req.cookies.token));
-  //  console.log(id._id);
    var data= await User.findById(id._id);
-  //  console.log(data.username);
    userProfile=data;
- }
-  console.log(userProfile);
+
+   }
+
   res.render('default/index',{
     userProfile:userProfile
   });
 });
 
 router.get('/about', (req, res) => {
-  console.log(req.cookies.token);
+  
   res.render('default/about');
 });
 router.get('/login', (req, res) => {
-  console.log(req.cookies.token);
+ 
   res.render('default/login');
 });
-router.get('/profile',async(req,res)=>{
+router.get('/profile',async(req,res)=>{ 
   let  userProfile;
   if(req.cookies.token){
-   var id =(jwt_decode(req.cookies.token));
-  //  console.log(id._id);
-   var data= await User.findById(id._id);
-  //  console.log(data.username);
-   userProfile=data;
- }else{
-   userProfile='';
- }
+  var id =jwt_decode(req.cookies.token);
+  var data= await User.findById(id._id);
+  userProfile=data;
+  }
+ 
     res.render('default/profile',{
       userProfile:userProfile
     });
-});
+},isAuthenticated,isSignedIn);
 
 
 router.get('/write',(req,res)=>{
   res.render('default/write');
-});
+},isAuthenticated,isSignedIn);
 
-// router.get('/exp', (req, res) => {
-//   res.render('default/exp');
-// });
+ router.get('/msg', (req, res) => {
+   res.render('default/msg',{
+     message:''
+   });
+});
 
 // router.get('/articles',(req,res)=>{   //others article
 //   res.render('')

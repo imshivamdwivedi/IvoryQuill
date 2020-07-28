@@ -26,18 +26,19 @@ mongoose
 
 // app created
 var app = express();
-app.use(express.static(path.join(__dirname, '../public')));
-app.set('views', path.join(__dirname, '../views'));
+
+
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '../views'));
+app.engine('html', require('ejs').renderFile);
+
+app.use(express.static(path.join(__dirname, '../public')));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(cookieSession());
 
-// app.use(function(req, res, next){
-//   res.locals.username = req.locals.username;
-//   next();
-// }); 
 
 app.use('/', mainRoute);
 app.use('/api',authRoute);
