@@ -21,6 +21,12 @@ router.get('/',async(req, res) => {
   });
 });
 
+router.get('/api/signin',async(req, res) => {
+   res.render('default/index',{
+     userProfile:userProfile
+   });
+ });
+
 router.get('/about', (req, res) => {
   
   res.render('default/about');
@@ -59,6 +65,11 @@ router.get('/write',async(req,res)=>{
    res.render('default/msg',{
      message:''
    });
+});
+router.get('/exp', (req, res) => {
+  res.render('default/exp',{
+    message:''
+  });
 });
 
 // router.get('/articles',(req,res)=>{   //others article

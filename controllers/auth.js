@@ -26,9 +26,8 @@ exports.signup = async(req, res) => {
     console.log(user);
     user.save((err, user) => {
       if (err) {
-        console.log(err);
-        return res.status(400).json({
-          err: "Not able to save user in DB"
+       return res.render('default/msg',{
+            message:"Some Error Occured please try Again !"
         });
       }
       res.render('default/msg',{
@@ -51,15 +50,15 @@ exports.signin = (req,res) =>{
 
    User.findOne({email},(err,user)=>{
        if(err|| !user){
-          return res.status(404).json({
-              err:"User Email Does not exist"
-          });
+       return res.render('default/msg',{
+            message:"User email doesn't Exist !"
+        });
        }
 
        if(!user.authenticate(password)){
-           return res.status(401).json({
-            err:"Email and Password did not match"
-           });
+       return res.render('default/msg',{
+            message:"Email and password didn't match !"
+        });
        }
        
        //token creation
@@ -99,8 +98,8 @@ exports.isAuthenticated = (req,res,next) =>{
     // console.log(req.profile._id);
     // console.log(req.auth._id);
     if(!checker){
-        return res.status(403).json({
-            err:"Access Denied"
+        res.render('default/msg',{
+            message:"Access Denied !"
         });
     }
     next();
@@ -108,8 +107,8 @@ exports.isAuthenticated = (req,res,next) =>{
 
 exports.isAdmin = (req,res,next)=>{
     if(req.profile.role===0){
-        return res.staus(403).json({
-            error:"Access Denied ! your are not Admin"
+        res.render('default/msg',{
+            message:"yoou are not Admin, Access Denied !"
         });
     }
     next();
