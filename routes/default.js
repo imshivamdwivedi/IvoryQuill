@@ -50,14 +50,16 @@ router.get('/profile',async(req,res)=>{
 
 
 router.get('/write',async(req,res)=>{
-  let  userProfile;
+  let  Token,Id;
   if(req.cookies.token){
   var id =jwt_decode(req.cookies.token);
-  var data= await User.findById(id._id);
-  userProfile=data;
+  Token=req.cookies.token;
+  Id=id._id;
+  // console.log(Token+ " "+Id);
   }
   res.render('default/write',{
-    userProfile:userProfile
+    Token:Token,
+    Id:Id
   });
 },isAuthenticated,isSignedIn);
 
