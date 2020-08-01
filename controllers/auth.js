@@ -3,11 +3,11 @@ var jwt = require("jsonwebtoken");
 const User = require("../server/modals/user");
 var config = require("../server/config");
 var nodemailer = require("nodemailer");
-
+var smtpTransport = require('nodemailer-smtp-transport');
 
 exports.signup = async(req, res) => {
    
-    const{email,phone} = req.body;
+    const{email,phone,name} = req.body;
     
     if(await User.findOne({email})){
         return res.render('default/msg',{
@@ -22,16 +22,44 @@ exports.signup = async(req, res) => {
     }
       const user = new User(req.body);
       console.log(user);
-      user.save((err, user) => {
-        if (err) {
-         return res.render('default/msg',{
-              message:"Some Error Occured please try Again !"
+
+      try{ 
+        var transporter = nodemailer.createTransport(smtpTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: {
+              user: 'ivoryquillpublishers@gmail.com',
+              pass: 'Anthology@2020'
+            }
+          }));
+    
+          var emailOptions = {
+            from: 'IvoryQuill Publications <ivoryquillpublishers@gmail.com>',
+            to: email,
+            subject: 'Successfully Created Account',
+            html: '<p>your Account is Created now login and publish your article' +name+'Than you</p>'
+           };
+          transporter.sendMail(emailOptions, (err, info) => {
+            if (err) {
+              console.log(err);
+            } else {
+                user.save((err, user) => {
+                    if (err) {
+                     return res.render('default/msg',{
+                          message:"Some Error Occured please try Again !"
+                      });
+                    }
+                     return res.render('default/msg',{
+                         message:"Account Created Successfully, Now Login !"
+                      });
+                  });
+            }
           });
+        }  catch(e){
+             console.log('Error:-', e);
         }
-        res.render('default/msg',{
-             message:"Account Created Successfully, Now Login !"
-          });
-      });
+      
     
 };
 
