@@ -1,4 +1,3 @@
-const {validationResult} = require("express-validator")
 var expressJwt = require("express-jwt");
 var jwt = require("jsonwebtoken");
 const User = require("../server/modals/user");
@@ -7,46 +6,38 @@ var nodemailer = require("nodemailer");
 
 
 exports.signup = async(req, res) => {
-    const errors = validationResult(req);
+   
     const{email,phone} = req.body;
     
-    // if (!errors.isEmpty()) {
-    //   return res.status(422).json({
-    //     error: errors.array()[0].msg
-    //   });
-    // }
     if(await User.findOne({email})){
-        res.render('default/msg',{
-            message:"User Already Exit , Try Another Mail to Sign Up !"
+        return res.render('default/msg',{
+            message:"User already registerd with this e-mail , try another mail to sign up !"
         });
-    }else{
-    
-  
-    const user = new User(req.body);
-    console.log(user);
-    user.save((err, user) => {
-      if (err) {
-       return res.render('default/msg',{
-            message:"Some Error Occured please try Again !"
-        });
-      }
-      res.render('default/msg',{
-          message:"Account Created Successfully, Now Login !"
-        });
-    });
     } 
+        
+    if(await User.findOne({phone})){
+       return res.render('default/msg',{
+            message:"Phone no. alreday registered  , Try Another Phone no. to Sign Up !"
+        });
+    }
+      const user = new User(req.body);
+      console.log(user);
+      user.save((err, user) => {
+        if (err) {
+         return res.render('default/msg',{
+              message:"Some Error Occured please try Again !"
+          });
+        }
+        res.render('default/msg',{
+             message:"Account Created Successfully, Now Login !"
+          });
+      });
+    
 };
 
 exports.signin = (req,res) =>{
-  // console.log(req.body);
-   const errors = validationResult(req);
+
    const {email,password} = req.body;
-  //  console.log(email);
-   if(!errors.isEmpty()){
-       return res.status(422).json({
-           errors:errors.array()[0].msg
-       });
-   }
 
    User.findOne({email},(err,user)=>{
        if(err|| !user){
@@ -84,7 +75,7 @@ exports.signout = (req, res) => {
     res.clearCookie("token");
     let userProfile;
     res.redirect('/login');
-  };
+};
 
 exports.isSignedIn = expressJwt({
     secret:config.secretKey,
@@ -93,10 +84,6 @@ exports.isSignedIn = expressJwt({
 
 exports.isAuthenticated = (req,res,next) =>{
     let checker = req.profile && req.auth && req.profile._id==req.auth._id;
-    // console.log(req.profile);
-    // console.log(req.auth);
-    // console.log(req.profile._id);
-    // console.log(req.auth._id);
     if(!checker){
         res.render('default/msg',{
             message:"Access Denied !"
@@ -114,3 +101,17 @@ exports.isAdmin = (req,res,next)=>{
     next();
 };
 
+exports.forgetPassword = (req,res)=>{
+    
+    const {email} = req.body;
+
+    User.findOne({email},(err,user)=>{
+        if(err|| !user){
+          return res.render('default/msg',{
+             message:"User email doesn't Exist !"
+          });
+        } 
+
+        const token = jwt.sign({_id:user._id},config.resetPasswordKey,{expire:new Date()+1000});
+    });    
+};
