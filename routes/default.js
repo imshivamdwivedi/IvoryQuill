@@ -68,9 +68,9 @@ router.get('/write',async(req,res)=>{
      message:''
    });
 });
-router.get('/exp', (req, res) => {
-  res.render('default/exp',{
-    message:''
+router.get('/articles', (req, res) => {
+  res.render('default/articles',{
+    Blogs:''
   });
 });
 

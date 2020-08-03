@@ -23,7 +23,7 @@ exports.signup = async(req, res) => {
       const user = new User(req.body);
       console.log(user);
 
-      try{ 
+      
         var transporter = nodemailer.createTransport(smtpTransport({
             host: 'smtp.gmail.com',
             port: 587,
@@ -38,7 +38,7 @@ exports.signup = async(req, res) => {
             from: 'IvoryQuill Publications <ivoryquillpublishers@gmail.com>',
             to: email,
             subject: 'Successfully Created Account',
-            html: '<p>your Account is Created now login and publish your article' +name+'Than you</p>'
+            html: '<p>Congratulations on successfully signing up with <a href="#">Ivoryquills</a>, we are pleased to welcome you to the family of literatees and lovers of words. Ivoryquill Publications is the one destination for all your needs. Whether it is anthology publishing, solo publishing, collaboration for short stories, publishing on the internet or in hard copy! We are a team of dedicated writers, editors, graphic designers and team leads who manage together to form a great experience for all of you we hope you enjoy your time at Ivoryquill<b> ' +name+' </b>Thank you</p>'
            };
           transporter.sendMail(emailOptions, (err, info) => {
             if (err) {
@@ -56,9 +56,7 @@ exports.signup = async(req, res) => {
                   });
             }
           });
-        }  catch(e){
-             console.log('Error:-', e);
-        }
+    
       
     
 };

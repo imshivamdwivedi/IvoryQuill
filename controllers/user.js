@@ -34,15 +34,19 @@ exports.updateUser =(req,res)=>{
        });
 };
 
-exports.getMyArticles= (req,res) =>{
+exports.getMyArticles= async (req,res) =>{
      console.log(req.profile._id);
-    Article.findOne({auther_id:req.profile._id}).exec((err,articles)=>{
-          if(err){
-              return res.status(404).json({
-                  err:"No Articles Found "
-              });
-          }
-
-          return res.json(articles);
-    });
+     user = await User.findOne({
+         "_id":req.profile._id
+     });
+     var Blogs =[];
+     for(i=0;i<user.articles.length;i++)
+          Blogs.push(user.articles[i]);
+  
+    console.log(Blogs[0].article.title);
+    console.log(Blogs[0].article.body);
+     res.json({
+         Blogs
+     });     
+    // res.send("lol");
 };

@@ -1,5 +1,5 @@
 const Article = require('../server/modals/article');
-
+const User = require('../server/modals/user');
 exports.getBlogById = (req,res,next,id)=>{
   Article.findById(id).exec((err,blog)=>{
         if(err || !blog){
@@ -25,7 +25,15 @@ exports.getBlogById = (req,res,next,id)=>{
 // };
 
 exports.getBlog=(req,res)=>{
-  return res.json(req.blog);
+   Article.findById({auther_id:req.profile}).exec((err,articles=>{
+    if(err || !blog){
+      return res.status(400).json({
+        err:"Blog Not Found"
+      });
+    }else{
+      return res.json(articles);
+    }
+   }));
 };
 
 exports.deleteBlog =(req,res) =>{
@@ -44,18 +52,33 @@ exports.deleteBlog =(req,res) =>{
 };
 
 exports.postBlog = (req,res) =>{
-  const article = new Article(req.body);
-  console.log(req.body);
-  // article.save((err, article) => {
-  //   if (err) {
-  //     console.log(err);
-  //     return res.status(400).json({
-  //       err: "Not able to save your Blog in DB"
-  //     });
-  //   }
-  //   res.json({
-  //     title: article.title,
-  //     body: article.body,
-  //   });
-  // });
+  const {title, data} = req.body;
+  
+  var content = {
+    title:title,
+    body:data,
+    auther_id:req.profile._id
+  }
+  var article = new Article(content);
+  article.save((err, article) => {
+    if (err) {
+      console.log(err);
+      return res.status(400).json({
+        err: "Not able to save your Blog in DB"
+      });
+    }
+  User.findByIdAndUpdate(
+    req.profile._id,
+    {$push: {articles:{article}}},
+    {safe: true, upsert: true},
+    function(err, articles) {
+      if(err)  
+         console.log(err);
+      console.log(articles);   
+    }
+  );
+  
+    console.log(article.title + " " + article.body + req.profile._id);
+
+  });
 };

@@ -1,6 +1,5 @@
-var express = require('express');
-var router = express.Router();
-
+const express = require('express');
+const router = express.Router();
 const {isSignedIn,isAuthenticated,isAdmin} = require('../controllers/auth');
 const{getUserById} = require('../controllers/user');
 const{getBlogById,getBlog,deleteBlog,postBlog} = require('../controllers/blog');
