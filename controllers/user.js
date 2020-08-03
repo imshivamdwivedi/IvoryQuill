@@ -6,7 +6,7 @@ var Article = require("../server/modals/article");
 exports.getUserById = (req,res,next,id)=>{
     User.findById(id).exec((err,user)=>{
         if(err || !user){
-            return res.status(404).json({
+            return res.json({
               err:"No user Found"
             });
         }
@@ -40,13 +40,21 @@ exports.getMyArticles= async (req,res) =>{
          "_id":req.profile._id
      });
      var Blogs =[];
-     for(i=0;i<user.articles.length;i++)
+     if(user.articles.length===0){
+        return res.render('default/msg',{
+            message:" No Artile Found, Please write One!"
+        });
+     }else{
+      for(i=0;i<user.articles.length;i++)
           Blogs.push(user.articles[i]);
-  
-    console.log(Blogs[0].article.title);
-    console.log(Blogs[0].article.body);
-     res.json({
-         Blogs
-     });     
+          return res.render('default/articles',{
+            Blogs:Blogs
+        });
+    //      console.log(Blogs[0].article.title);
+    // console.log(Blogs[0].article.body);
+    //  res.json({
+    //      Blogs
+    //  });     
     // res.send("lol");
+     }
 };

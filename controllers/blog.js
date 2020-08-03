@@ -74,11 +74,11 @@ exports.postBlog = (req,res) =>{
     function(err, articles) {
       if(err)  
          console.log(err);
-      console.log(articles);   
+      // console.log(articles);   
     }
   );
   
-    console.log(article.title + " " + article.body + req.profile._id);
+    // console.log(article.title + " " + article.body + req.profile._id);
 
   });
 };
