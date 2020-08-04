@@ -25,7 +25,7 @@
             </div>
         </nav>
     </header>
-
+    <!-- <%=Token%> -->
     <section class="container profile center">
         <img class="profile-pic" src="images/profilepic.jpg" alt="profil_pic">
         <div class="profile-options">
@@ -37,15 +37,37 @@
                 <li class="options"><a href="/edit/profile">Edit Profile</a></li>
                 <li class="options"><a href="/write">Write Article</a></li>
                 <!-- <li class="options"><a href="#">Edit Article</a></li> -->
-                <li class="options"><a href="/api/articles/<%=userProfile._id%>">My Article</a></li>
+                <li class="options"><a id="ma" href="api/articles">My Article</a></li>
                 <li class="options"><a href="#">Article Status</a></li>
             </ul>
         </div>
     </section>
-    
+    <div id="token" name="hid" data-test=<%-Token%>></div>
+    <div id="Id" name="hid" data-test=<%-userProfile._id%>></div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="javascripts/profile.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+    <!-- <script>
+        // console.log(document.querySelector('#token').dataset.test);
+        $(document).ready(function(){
+            $('#ma').click(function(){
+                  $.ajax({
+                        type: 'GET',
+                        url: '/api/articles/'+document.querySelector('#Id').dataset.test,
+                        contentType: 'application/json',
+                        headers: {
+                         Authorization: 'Bearer '+document.querySelector('#token').dataset.test
+                        },
+                        data:JSON.stringify(),
+                            success: function(data) {
+                                console.log("HI");
+                                console.log(data);
+                            }    
+                  });		  
+            });
+        });
+            </script> -->
 </body>
 </html>

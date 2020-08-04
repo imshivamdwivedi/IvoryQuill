@@ -72,8 +72,11 @@ exports.postBlog = (req,res) =>{
     {$push: {articles:{article}}},
     {safe: true, upsert: true},
     function(err, articles) {
-      if(err)  
+      if(err){  
          console.log(err);
+      }else{
+        res.status(201);
+      }  
       // console.log(articles);   
     }
   );

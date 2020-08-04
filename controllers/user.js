@@ -35,7 +35,7 @@ exports.updateUser =(req,res)=>{
 };
 
 exports.getMyArticles= async (req,res) =>{
-     console.log(req.profile._id);
+    //  console.log(req.profile._id);
      user = await User.findOne({
          "_id":req.profile._id
      });
@@ -47,7 +47,8 @@ exports.getMyArticles= async (req,res) =>{
      }else{
       for(i=0;i<user.articles.length;i++)
           Blogs.push(user.articles[i]);
-          return res.render('default/articles',{
+    //  console.log(Blogs);    
+         return res.render('default/articles',{
             Blogs:Blogs
         });
     //      console.log(Blogs[0].article.title);
