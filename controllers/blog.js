@@ -1,5 +1,6 @@
 const Article = require('../server/modals/article');
 const User = require('../server/modals/user');
+
 exports.getBlogById = (req,res,next,id)=>{
   Article.findById(id).exec((err,blog)=>{
         if(err || !blog){
@@ -86,5 +87,22 @@ exports.postBlog = (req,res) =>{
   
     // console.log(article.title + " " + article.body + req.profile._id);
 
+  });
+};
+
+exports.getAllArticles = async (req, res) => {
+  Article.find({}).exec( (err, articles) => {
+    var Blogs =[];
+        if(articles.length===0){
+            return res.render('default/msg',{
+                message:" No Artile Found, Please write One!"
+            });
+        }else{
+        for(i=0;i<articles.length;i++)
+            Blogs.push(articles[i]);
+            return res.render('default/articles',{
+                Blogs:Blogs
+            });
+        }
   });
 };

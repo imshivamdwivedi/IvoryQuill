@@ -8494,7 +8494,7 @@ a.text-dark:hover, a.text-dark:focus {
   margin-left: 5%;
   margin-right: 5%;
   margin-bottom: 4%;
-  height: 30%;
+  height: 40%;
 }
 
 .article-card:hover {
@@ -8507,7 +8507,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 .article-title {
   width: 100%;
-  background-color: #ffc107;
+  background-color: #f7b500;
   padding: 1%;
 }
 
@@ -8548,7 +8548,7 @@ a.text-dark:hover, a.text-dark:focus {
 .banner {
   width: 100%;
   color: #ffffff;
-  background-color: #ffc107;
+  background-color: #f7b500;
   height: 100px;
   text-align: center;
   font-size: 50px;
@@ -8556,7 +8556,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .button-link {
-  background-color: #ffc107;
+  background-color: #f7b500;
   color: #ffffff;
   padding: 10px;
   align-self: center;
@@ -8567,12 +8567,13 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .modal-header {
-  background-color: #ffc107;
+  background-color: #f7b500;
   color: #ffffff;
+  font-family: 'Crimson Text', serif;
 }
 
 #articleContent {
   font-size: large;
-  font-family: sans-serif;
+  font-family: 'Crimson Text', serif;
   padding: 20px;
 }

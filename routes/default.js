@@ -5,6 +5,7 @@ const User = require('../server/modals/user');
 const {isSignedIn,isAuthenticated} = require("../controllers/auth");
 const {getUser,getUserById,getMyArticles,updateUser} = require("../controllers/user");
 const config = require('../server/config');
+const blogController = require("../controllers/blog");
 
 /* GET home page. */
 router.get('/',async(req, res) => {
@@ -66,16 +67,13 @@ router.get('/write',async(req,res)=>{
   });
 },isAuthenticated,isSignedIn);
 
- router.get('/msg', (req, res) => {
-   res.render('default/msg',{
-     message:''
-   });
-});
-router.get('/articles', (req, res) => {
-  res.render('default/articles',{
-    Blogs:''
+router.get('/msg', (req, res) => {
+  res.render('default/msg',{
+    message:''
   });
 });
+
+router.get('/articlesPanel', isSignedIn, blogController.getAllArticles);
 
 // router.get('/articles',(req,res)=>{   //others article
 //   res.render('')
