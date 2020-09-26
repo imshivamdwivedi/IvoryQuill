@@ -1,6 +1,6 @@
 const {body,validationResult} = require("express-validator")
 const User = require("../server/modals/user");
-
+const monogodb = require("mongoose");
 var Article = require("../server/modals/article");
 
 exports.getUserById = (req,res,next,id)=>{
@@ -36,26 +36,28 @@ exports.updateUser =(req,res)=>{
 
 exports.getMyArticles= async (req,res) =>{
     //  console.log(req.profile._id);
-     user = await User.findOne({
-         "_id":req.profile._id
-     });
-     var Blogs =[];
-     if(user.articles.length===0){
-        return res.render('default/msg',{
-            message:" No Artile Found, Please write One!"
-        });
-     }else{
-      for(i=0;i<user.articles.length;i++)
-          Blogs.push(user.articles[i]);
-    //  console.log(Blogs);    
-         return res.render('default/articles',{
-            Blogs:Blogs
-        });
-    //      console.log(Blogs[0].article.title);
-    // console.log(Blogs[0].article.body);
-    //  res.json({
-    //      Blogs
-    //  });     
-    // res.send("lol");
-     }
+    // console.log(req.auth._id);
+    Article.find({
+        auther_id : monogodb.Types.ObjectId(req.auth._id)
+    }).exec((err, articles) => {
+        var Blogs =[];
+        if(articles.length===0){
+            return res.render('default/msg',{
+                message:" No Artile Found, Please write One!"
+            });
+        }else{
+        for(i=0;i<articles.length;i++)
+            Blogs.push(articles[i]);
+        //  console.log(Blogs);    
+            return res.render('default/articles',{
+                Blogs:Blogs
+            });
+        //      console.log(Blogs[0].article.title);
+        // console.log(Blogs[0].article.body);
+        //  res.json({
+        //      Blogs
+        //  });     
+        // res.send("lol");
+        }
+    });
 };

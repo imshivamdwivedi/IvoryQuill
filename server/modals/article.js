@@ -25,9 +25,20 @@ var articleSchema = mongoose.Schema({
     },
     date:{
         type: Date
+    },
+
+    userMail : {
+        type : String,
+        required : true
     }
 
 },{ timestamps: true });
+
+articleSchema.methods = {
+    getArticles : function (_id) {
+        
+    }
+};
 
 var Article = mongoose.model("Article", articleSchema);
 
@@ -36,5 +47,6 @@ var Article = mongoose.model("Article", articleSchema);
 //     title:'Love',
 //     body:"This is my Love",
 // });
+
 
 module.exports = Article;

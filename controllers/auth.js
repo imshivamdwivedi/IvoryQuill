@@ -24,26 +24,26 @@ exports.signup = async(req, res) => {
       console.log(user);
 
       
-        var transporter = nodemailer.createTransport(smtpTransport({
-            host: 'smtp.gmail.com',
-            port: 587,
-            secure: false,
-            auth: {
-              user: 'ivoryquillpublishers@gmail.com',
-              pass: 'Anthology@2020'
-            }
-          }));
+        // var transporter = nodemailer.createTransport(smtpTransport({
+        //     host: 'smtp.gmail.com',
+        //     port: 587,
+        //     secure: false,
+        //     auth: {
+        //       user: 'ivoryquillpublishers@gmail.com',
+        //       pass: 'Anthology@2020'
+        //     }
+        //   }));
     
-          var emailOptions = {
-            from: 'IvoryQuill Publications <ivoryquillpublishers@gmail.com>',
-            to: email,
-            subject: 'Successfully Created Account',
-            html: '<p>Congratulations on successfully signing up with <a href="#">Ivoryquills</a>, we are pleased to welcome you to the family of literatees and lovers of words. Ivoryquill Publications is the one destination for all your needs. Whether it is anthology publishing, solo publishing, collaboration for short stories, publishing on the internet or in hard copy! We are a team of dedicated writers, editors, graphic designers and team leads who manage together to form a great experience for all of you we hope you enjoy your time at Ivoryquill<b> ' +name+' </b>Thank you</p>'
-           };
-          transporter.sendMail(emailOptions, (err, info) => {
-            if (err) {
-              console.log(err);
-            } else {
+        //   var emailOptions = {
+        //     from: 'IvoryQuill Publications <ivoryquillpublishers@gmail.com>',
+        //     to: email,
+        //     subject: 'Successfully Created Account',
+        //     html: '<p>Congratulations on successfully signing up with <a href="#">Ivoryquills</a>, we are pleased to welcome you to the family of literatees and lovers of words. Ivoryquill Publications is the one destination for all your needs. Whether it is anthology publishing, solo publishing, collaboration for short stories, publishing on the internet or in hard copy! We are a team of dedicated writers, editors, graphic designers and team leads who manage together to form a great experience for all of you we hope you enjoy your time at Ivoryquill<b> ' +name+' </b>Thank you</p>'
+        //    };
+        //   transporter.sendMail(emailOptions, (err, info) => {
+        //     if (err) {
+        //       console.log(err);
+        //     } else {
                 user.save((err, user) => {
                     if (err) {
                      return res.render('default/msg',{
@@ -54,8 +54,8 @@ exports.signup = async(req, res) => {
                          message:"Account Created Successfully, Now Login !"
                       });
                   });
-            }
-          });
+        //     }
+        //   });
     
       
     
@@ -79,7 +79,7 @@ exports.signin = (req,res) =>{
        }
        
        //token creation
-       const token = jwt.sign({_id:user._id},config.secretKey);
+       const token = jwt.sign({_id:user._id, userMail : user.email},config.secretKey);
        // putting token in cookie
        res.cookie("token",token,{expire:new Date()+5000});
 
@@ -105,10 +105,13 @@ exports.signout = (req, res) => {
 
 exports.isSignedIn = expressJwt({
     secret:config.secretKey,
-    userProperty:"auth"
+    userProperty:"auth",
+    getToken: (req) => {
+        return req.headers.cookie.split('=')[1];
+    }
 });
 
-exports.isAuthenticated = (req,res,next) =>{
+exports.isAuthenticated = (req,res,next) =>{    
     let checker = req.profile && req.auth && req.profile._id==req.auth._id;
     if(!checker){
         res.render('default/msg',{

@@ -53,12 +53,15 @@ exports.deleteBlog =(req,res) =>{
 
 exports.postBlog = (req,res) =>{
   const {title, data} = req.body;
-  
+  //console.log(req.headers.cookie.split('=')[1].split('.')[1]);
+  var userMailEncoded = req.headers.cookie.split('=')[1].split('.')[1];
+  var userMail = JSON.parse(Buffer.from(userMailEncoded, 'base64').toString('utf-8')).userMail;
   var content = {
     title:title,
     body:data,
-    auther_id:req.profile._id
-  }
+    auther_id:req.profile._id,
+    userMail : userMail
+  };
   var article = new Article(content);
   article.save((err, article) => {
     if (err) {

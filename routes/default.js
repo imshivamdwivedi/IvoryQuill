@@ -83,7 +83,7 @@ router.get('/articles', (req, res) => {
 router.param("userId", getUserById);
 router.get('/api/profile/:userId',isSignedIn,isAuthenticated,getUser);  //get profile
 router.put('/api/profile/update/:userId',isSignedIn,isAuthenticated,updateUser);  //edit profile
-router.get('/api/articles/',isSignedIn,isAuthenticated,getMyArticles);  //self publish articles
+router.get('/api/articles/',isSignedIn,getMyArticles);  //self publish articles
 // router.post(/api/contact-us/user:Id); //conatct us
 
 module.exports = router;
