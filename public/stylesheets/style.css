@@ -8547,8 +8547,6 @@ a.text-dark:hover, a.text-dark:focus {
 
 .banner {
   width: 100%;
-  color: #ffffff;
-  background-color: #f7b500;
   height: 100px;
   text-align: center;
   font-size: 50px;
@@ -8584,4 +8582,11 @@ a.text-dark:hover, a.text-dark:focus {
   margin: 10px;
   font-family: 'Crimson Text', serif;
   color: #ffffff;
+}
+
+.line {
+  height: 1px;
+  background-color: #000000;
+  width: 90%;
+  margin-left: 5%;
 }

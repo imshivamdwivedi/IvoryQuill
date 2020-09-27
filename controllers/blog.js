@@ -71,7 +71,11 @@ exports.postBlog = (req,res) =>{
         err: "Not able to save your Blog in DB"
       });
     }
-  
+    else {
+      return res.render('default/msg',{
+          message:" Article submitted"
+      });
+    }
     // console.log(article.title + " " + article.body + req.profile._id);
 
   });
