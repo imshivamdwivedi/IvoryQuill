@@ -71,19 +71,6 @@ exports.postBlog = (req,res) =>{
         err: "Not able to save your Blog in DB"
       });
     }
-  User.findByIdAndUpdate(
-    req.profile._id,
-    {$push: {articles:{article}}},
-    {safe: true, upsert: true},
-    function(err, articles) {
-      if(err){  
-         console.log(err);
-      }else{
-        res.status(201);
-      }  
-      // console.log(articles);   
-    }
-  );
   
     // console.log(article.title + " " + article.body + req.profile._id);
 
@@ -92,6 +79,25 @@ exports.postBlog = (req,res) =>{
 
 exports.getAllArticles = async (req, res) => {
   Article.find({}).exec( (err, articles) => {
+    var Blogs =[];
+        if(articles.length===0){
+            return res.render('default/msg',{
+                message:" No Artile Found, Please write One!"
+            });
+        }else{
+        for(i=0;i<articles.length;i++)
+            Blogs.push(articles[i]);
+            return res.render('default/articles',{
+                Blogs:Blogs
+            });
+        }
+  });
+};
+
+exports.getAllModArticles = async (req,res) => {
+  Article.find({
+    flag : 1,
+  }).exec( (err, articles) => {
     var Blogs =[];
         if(articles.length===0){
             return res.render('default/msg',{

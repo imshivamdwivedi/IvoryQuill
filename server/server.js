@@ -1,14 +1,15 @@
 const express = require('express');
 var config = require('./config');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var flash = require('req-flash');
 const path = require('path');
-const cookieParser = require('cookie-parser')
-var mongoose = require('mongoose')
+const cookieParser = require('cookie-parser');
+var mongoose = require('mongoose');
 //route in use
 const mainRoute = require('../routes/default');
 const authRoute = require('../routes/auth.js');
 const blogRoute = require('../routes/blog.js');
+const adminRoute = require('../routes/admin.js');
 
 
 
@@ -41,9 +42,9 @@ app.use(cookieParser());
 
 
 app.use('/', mainRoute);
-app.use('/api',authRoute);
-app.use('/api/blog',blogRoute);
-
+app.use('/api', authRoute);
+app.use('/api/blog', blogRoute);
+app.use('/mod', adminRoute);
 
 const port = process.env.PORT ||3000;
 app.listen(port, () => {

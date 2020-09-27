@@ -8494,7 +8494,7 @@ a.text-dark:hover, a.text-dark:focus {
   margin-left: 5%;
   margin-right: 5%;
   margin-bottom: 4%;
-  height: 40%;
+  height: 50%;
 }
 
 .article-card:hover {
@@ -8576,4 +8576,12 @@ a.text-dark:hover, a.text-dark:focus {
   font-size: large;
   font-family: 'Crimson Text', serif;
   padding: 20px;
+}
+
+.actionButton {
+  padding: 15px;
+  float: right;
+  margin: 10px;
+  font-family: 'Crimson Text', serif;
+  color: #ffffff;
 }

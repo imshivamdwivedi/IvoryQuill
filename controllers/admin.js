@@ -1,18 +1,9 @@
 const Article = require("../server/modals/article");
 const User = require("../server/modals/user");
+const url = require("url");
+const mongo = require("mongoose");
 
-exports.getAllArticles = (req,res) =>{
-    Article.find().exec((err,articles)=>{
-       if(err || !articles){
-          return res.status(400).json({
-                  err:"Bad request"
-         });
-       }
-       return res.json(articles);
-    });
-};
-
-exports.getAllUsers =(req,res) =>{
+exports.getAllUsers = (req,res) =>{
    User.find().exec((err,users)=>{
        if(err||req.profile.role!=1 ){
           return res.status(400).json({
@@ -34,19 +25,51 @@ exports.getUserInfo = (req,res)=>{
   });
 };
 
-exports.deleteArticle = (req,res)=>{
-  let blog=req.blog;
-  blog.remove((err,deletedBlog)=>{
-    if(err){
-        return res.status(400).json({
-         err:"Some Error Ocuured"
-        });
-    }
-    res.json({
-        messsage:"Delete Blog!",
-        deletedBlog
-    });
+exports.getArticleModPage = (req, res) => {
+  Article.find({}).exec( (err, articles) => {
+    var Blogs =[];
+        if(articles.length===0){
+            return res.render('default/msg',{
+                message:" No Artile Found, Please write One!"
+            });
+        }else{
+        for(i=0;i<articles.length;i++)
+            Blogs.push(articles[i]);
+            return res.render('default/articlesMod',{
+                Blogs:Blogs
+            });
+        }
   });
 };
 
+exports.acceptArticle = (req, res) => {
+  const articleId = url.parse(req.url, true).query.id;
+  Article.updateOne({
+    _id : mongo.Types.ObjectId(articleId)
+  }, 
+  {
+    $set : {
+      flag : 1
+    }
+  }).exec( (err, result) => {
+    if (!err) {
+      res.redirect('/mod/adminPanel');
+    }
+  });
+};
 
+exports.rejectArticle = (req, res) => {
+  const articleId = url.parse(req.url, true).query.id;
+  Article.updateOne({
+    _id : mongo.Types.ObjectId(articleId)
+  }, 
+  {
+    $set : {
+      flag : 0
+    }
+  }).exec( (err, result) => {
+    if (!err) {
+      res.redirect('/mod/adminPanel');
+    }
+  });
+};

@@ -17,10 +17,6 @@ var userSchema = mongoose.Schema({
        type:Number,
        required:true
     },
-    articles: {
-      type: Array,
-      default: null
-    },
     encry_password: {
         type: String,
         required: true

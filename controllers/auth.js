@@ -4,6 +4,7 @@ const User = require("../server/modals/user");
 var config = require("../server/config");
 var nodemailer = require("nodemailer");
 var smtpTransport = require('nodemailer-smtp-transport');
+const Article = require("../server/modals/article");
 
 exports.signup = async(req, res) => {
    
@@ -122,12 +123,19 @@ exports.isAuthenticated = (req,res,next) =>{
 };
 
 exports.isAdmin = (req,res,next)=>{
-    if(req.profile.role===0){
-        res.render('default/msg',{
-            message:"yoou are not Admin, Access Denied !"
-        });
-    }
-    next();
+    const userProfile = JSON.parse(Buffer.from(req.headers.cookie.split('=')[1].split('.')[1], 'base64').toString('utf-8'));
+    User.findOne({
+        email : userProfile.userMail
+    }).exec((err, user) => {
+        if (user.role != 1) {
+            return res.render('default/msg',{
+                message:"Access denied!"
+            });
+        }
+        else {
+            next();
+        }
+    });
 };
 
 exports.forgetPassword = (req,res)=>{

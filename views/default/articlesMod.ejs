@@ -45,7 +45,11 @@
           <footer><%= Blogs[i].userMail %></footer>
       </blockquote>
     </div>
+
     <div class="hidden"><%= Blogs[i].flag%></div>
+    <a href="/mod/api/acceptArticle?id=<%=Blogs[i]._id %>"  class="btn btn-success actionButton">Accept</a>
+    <a href="/mod/api/rejectArticle?id=<%=Blogs[i]._id %>" class="btn btn-danger actionButton">Reject</a>
+
   </div>
   <% } %>
 

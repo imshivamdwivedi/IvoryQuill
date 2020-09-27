@@ -73,7 +73,7 @@ router.get('/msg', (req, res) => {
   });
 });
 
-router.get('/articlesPanel', isSignedIn, blogController.getAllArticles);
+router.get('/articlesPanel', isSignedIn, blogController.getAllModArticles);
 
 // router.get('/articles',(req,res)=>{   //others article
 //   res.render('')
