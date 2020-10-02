@@ -14,7 +14,7 @@
     "dotenv": "^8.2.0",
     "ejs": "^2.6.2",
     "express": "~4.16.1",
-    "express-jwt": "^6.0.0",
+    "express-jwt": "^5.0.0",
     "express-validator": "^6.6.0",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
@@ -26,6 +26,7 @@
     "nodemailer-smtp-transport": "^2.7.4",
     "nodemon": "^2.0.4",
     "req-flash": "0.0.3",
+    "toastr": "^2.1.4",
     "uuid": "^8.2.0",
     "uuidv4": "^6.1.1"
   }

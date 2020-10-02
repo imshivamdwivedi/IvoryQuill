@@ -52,7 +52,7 @@ exports.deleteBlog =(req,res) =>{
   });
 };
 
-exports.postBlog = (req,res) =>{
+exports.postBlog = async (req,res) =>{
   const {title, data} = req.body;
   //console.log(req.headers.cookie.split('=')[1].split('.')[1]);
   var userMailEncoded = req.headers.cookie.split('=')[1].split('.')[1];

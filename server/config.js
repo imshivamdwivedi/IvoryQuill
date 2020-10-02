@@ -3,4 +3,4 @@ module.exports = {
     'resetPasswordKey': '12345-67890-09876',
     'mongoUrl':'mongodb+srv://mern123:mern123@cluster0-ru1na.gcp.mongodb.net/test?retryWrites=true&w=majority',
     'DATABASE':'mongodb://localhost:27017/ivory'
-}
+};
